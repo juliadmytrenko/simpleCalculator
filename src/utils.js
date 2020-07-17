@@ -4,54 +4,8 @@ export const convertStringToArrayOfNumbers = (str) => {
 
 //[[2,-1],[3,1],5] // = 2x^(-1) + 3x^1 + 5
 //[[1,-1], [2,2],[-1,1],[6,3]] // = x^(-1) + 2x^2 - x + 6x^3
-export const testLinkedList = () => {
-  // creating an object for the
-  // Linkedlist class
-  var ll = new LinkedList();
-
-  // testing isEmpty on an empty list
-  // returns true
-  console.log(ll.isEmpty());
-
-  // adding element to the list
-  ll.add([10, 5]);
-
-  // prints 10
-  ll.printList();
-
-  // returns 1
-  console.log(ll.size_of_list());
-
-  // adding more elements to the list
-  ll.add([20, 4]);
-  ll.add([30, 6]);
-  ll.add([40, 7]);
-  ll.add([50, 2]);
-
-  // returns 10 20 30 40 50
-  ll.printList();
-
-  // prints 10 20 30 40
-  ll.printList();
-
-  // insert 60 at second position
-  // ll contains 10 20 60 30 40
-  ll.insertAt([60, 4], 2);
-
-  ll.printList();
-
-  // returns false
-  console.log("is List Empty ? " + ll.isEmpty());
-
-  // remove 3rd element from the list
-  console.log("remove from index 3: ", ll.removeFrom(3));
-
-  // prints 10 20 60 40
-  ll.printList();
-};
 
 // Linked List implementation
-
 class Node {
   constructor(element) {
     this.element = element ?? null;
@@ -148,7 +102,7 @@ const polyAdd = (poly1, poly2, resultPoly) => {
   }
 };
 
-export const zadanie = () => {
+export const addPolynomials = () => {
   var poly1 = new Node();
   // Create first polunomial of 5x^2 + 4x^1 + 2x^0
   // poly1.add([5, 2], [4, 1], [2, 0]);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { zadanie } from "../utils.js";
+import { addPolynomials, testLinkedList } from "../utils.js";
 
 const Calculator = () => {
   const [input1, setInput1] = useState("");
@@ -11,7 +11,7 @@ const Calculator = () => {
     // setOutput(
     // );
 
-    zadanie();
+    addPolynomials();
   };
 
   return (
