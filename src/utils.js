@@ -9,38 +9,35 @@ export const convertStringToArrayOfNumbers = (str) => {
 class Node {
   constructor(element) {
     this.element = element ?? null;
-    // this.head = null;
-    // this.size = arguments.length;
     this.next = null;
   }
 
   // adds an element at the end
   // of list
-  add(element) {
-    // for (var i = 0; i < arguments.length; ++i) {
-    // creates a new node
-    var node = new Node(element);
-    // console.log("this element ", this.element.next);
+  add() {
+    for (var i = 0; i < arguments.length; ++i) {
+      // creates a new node
+      var node = new Node(arguments[i]);
 
-    // to store current node
-    var current;
+      // to store current node
+      var current;
 
-    // if list is Empty add the
-    // element and make it head
-    if (this.element === null) this.element = node.element;
-    else {
-      current = this;
+      // if list is Empty add the
+      // element and make it head
+      if (this.element === null) this.element = node.element;
+      else {
+        current = this;
 
-      // iterate to the end of the
-      // list
-      while (current.next) {
-        current = current.next;
+        // iterate to the end of the
+        // list
+        while (current.next) {
+          current = current.next;
+        }
+
+        // add node
+        current.next = node;
       }
-
-      // add node
-      current.next = node;
     }
-    // }
   }
 
   // Helper Methods
@@ -49,8 +46,17 @@ class Node {
   printList() {
     var curr = this;
     var str = "";
-    while (curr && curr.element !== null) {
-      str += curr.element[0] + "x^" + curr.element[1] + " + ";
+    while (curr && curr.element) {
+      if (curr.element[0] === 0) curr = curr.next;
+
+      let pow = curr.element[1];
+      if (pow < 0) pow = "(" + pow + ")";
+
+      if (curr.element[0] < 0) {
+        str += "(" + curr.element[0] + "x^" + pow + ") + ";
+      } else {
+        str += curr.element[0] + "x^" + pow + " + ";
+      }
       curr = curr.next;
     }
     console.log(str.slice(0, -3));
@@ -58,6 +64,11 @@ class Node {
 }
 
 const polyAdd = (poly1, poly2, resultPoly) => {
+  if (!poly1.element || !poly2.element) {
+    console.log("ERROR: Values of both polynomials must be specified.");
+    return;
+  }
+
   while (poly1 && poly2) {
     // If power of 1st polynomial is greater then 2nd, then store 1st as it is
     // and move its pointer
@@ -104,23 +115,17 @@ const polyAdd = (poly1, poly2, resultPoly) => {
 
 export const addPolynomials = () => {
   var poly1 = new Node();
-  // Create first polunomial of 5x^2 + 4x^1 + 2x^0
-  // poly1.add([5, 2], [4, 1], [2, 0]);
-  poly1.add([5, 2]);
-  poly1.add([4, 1]);
-  poly1.add([2, 0]);
+  // Create first polynomial of 5x^2 + 4x^1 + 2x^0 + (-4x^(-2) + (-4x^(-4))
+  poly1.add([5, 3], [4, 2], [2, 0], [-4, -2], [-4, -4]);
 
   var poly2 = new Node();
   // Create second polynomial of 5x^1 + 5x^0
-  // poly2.add([5, 1], [5, 0]);
-  poly2.add([5, 1]);
-  poly2.add([5, 0]);
+  poly2.add([5, 1], [5, 0], [4, -2]);
 
   poly1.printList();
   poly2.printList();
   var result = new Node();
   polyAdd(poly1, poly2, result);
-
-  // result should equal 5x^2 + 9x^1 + 7x^0
+  // Result in this case should equal 5x^2 + 9x^1 + 7x^0
   result.printList();
 };
