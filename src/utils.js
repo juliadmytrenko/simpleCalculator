@@ -15,12 +15,12 @@ class Node {
   // adds an element at the end
   // of list
   add() {
-    for (var i = 0; i < arguments.length; ++i) {
+    for (let i = 0; i < arguments.length; ++i) {
       // creates a new node
-      var node = new Node(arguments[i]);
+      const node = new Node(arguments[i]);
 
       // to store current node
-      var current;
+      let current;
 
       // if list is Empty add the
       // element and make it head
@@ -44,8 +44,8 @@ class Node {
 
   // prints the list items
   printList() {
-    var curr = this;
-    var str = "";
+    let curr = this;
+    let str = "";
     while (curr && curr.element) {
       if (curr.element[0] === 0) curr = curr.next;
 
@@ -114,18 +114,22 @@ const polyAdd = (poly1, poly2, resultPoly) => {
 };
 
 export const addPolynomials = () => {
-  var poly1 = new Node();
+  const poly1 = new Node();
   // Create first polynomial of 5x^2 + 4x^1 + 2x^0 + (-4x^(-2) + (-4x^(-4))
   poly1.add([5, 3], [4, 2], [2, 0], [-4, -2], [-4, -4]);
 
-  var poly2 = new Node();
+  const poly2 = new Node();
   // Create second polynomial of 5x^1 + 5x^0
   poly2.add([5, 1], [5, 0], [4, -2]);
 
   poly1.printList();
   poly2.printList();
-  var result = new Node();
+  const result = new Node();
   polyAdd(poly1, poly2, result);
   // Result in this case should equal 5x^2 + 9x^1 + 7x^0
   result.printList();
 };
+
+//TODO
+// PURE FUNCTIONS zrobic aby polyAdd zwracalo obiekt(czy cokolwiek to jest) z wynikiem
+// testy jednostkowe
