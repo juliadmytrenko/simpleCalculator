@@ -7,23 +7,25 @@
 
 // Linked List implementation
 
+type PolyElement = [number, number];
+
 export interface Node {
-  element: [number, number] | null;
+  element: PolyElement | null;
   next: Node | null;
 }
 
 export class Node {
-  constructor(element?: Node["element"]) {
+  constructor(element?: PolyElement) {
     this.element = element ?? null;
     this.next = null;
   }
 
   // adds an element at the end
   // of list
-  add(...args: Node["element"][]) {
+  add(...args: [PolyElement, ...PolyElement[]]) {
     for (let i = 0; i < args.length; ++i) {
       // creates a new node
-      const node = new Node(arguments[i]);
+      const node = new Node(args[i]);
 
       // to store current node
       let current;
@@ -77,10 +79,10 @@ export const addPoly = (poly1: Node, poly2: Node) => {
 };
 
 const add = (poly1: Node, poly2: Node, resultPoly: Node) => {
-  if (!poly1.element || !poly2.element) {
-    console.log("ERROR: Values of both polynomials must be specified.");
-    return;
-  }
+  // if (!poly1.element || !poly2.element) {
+  //   console.log("ERROR: Values of both polynomials must be specified.");
+  //   return;
+  // }
 
   while (poly1 && poly2) {
     // If power of 1st polynomial is greater then 2nd, then store 1st as it is
@@ -129,8 +131,8 @@ const add = (poly1: Node, poly2: Node, resultPoly: Node) => {
 export const addPolynomials = () => {
   const poly1 = new Node();
   // Create first polynomial of 5x^2 + 4x^1 + 2x^0 + (-4x^(-2) + (-4x^(-4))
-  poly1.add([5, 3], [4, 2], [2, 0], [-4, -2], [-4, -4]);
-  // poly1.add(1);
+  // poly1.add([5, 3], [4, 2], [2, 0], [-4, -2], [-4, -4]);
+  poly1.add([1, 2], [1, 3]);
 
   const poly2 = new Node();
   // Create second polynomial of 5x^1 + 5x^0
