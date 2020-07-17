@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  addTwoExpressions,
-  convertStringToArrayOfNumbers,
-  testLinkedList,
-  zadanie,
-} from "../utils.js";
+import { zadanie } from "../utils.js";
 
 const Calculator = () => {
   const [input1, setInput1] = useState("");
@@ -13,14 +8,9 @@ const Calculator = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setOutput(
-      addTwoExpressions(
-        convertStringToArrayOfNumbers(input1),
-        convertStringToArrayOfNumbers(input2)
-      )
-    );
+    // setOutput(
+    // );
 
-    // testLinkedList();
     zadanie();
   };
 

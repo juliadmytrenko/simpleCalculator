@@ -2,19 +2,6 @@ export const convertStringToArrayOfNumbers = (str) => {
   return str.split`,`.map((x) => +x);
 };
 
-export const addTwoExpressions = (A, B) => {
-  const m = A.length;
-  const n = B.length;
-
-  const size = Math.max(m, n);
-  const sum = new Array(size);
-  for (let i = 0; i < size; ++i) sum[i] = 0;
-  for (let i = 0; i < m; ++i) sum[i] = A[i];
-  for (let i = 0; i < n; ++i) sum[i] += B[i];
-
-  return sum;
-};
-
 //[[2,-1],[3,1],5] // = 2x^(-1) + 3x^1 + 5
 //[[1,-1], [2,2],[-1,1],[6,3]] // = x^(-1) + 2x^2 - x + 6x^3
 export const testLinkedList = () => {
@@ -65,143 +52,50 @@ export const testLinkedList = () => {
 
 // Linked List implementation
 
-// User defined class node
 class Node {
-  // constructor
   constructor(element) {
-    this.element = element;
-    // this.coeff = element[0];
-    // this.pow = element[1];
+    this.element = element ?? null;
+    // this.head = null;
+    // this.size = arguments.length;
     this.next = null;
-  }
-}
-
-class LinkedList {
-  constructor() {
-    this.head = null;
-    this.size = 0;
   }
 
   // adds an element at the end
   // of list
-  add() {
-    for (var i = 0; i < arguments.length; ++i) {
-      // creates a new node
-      var node = new Node(arguments[i]);
+  add(element) {
+    // for (var i = 0; i < arguments.length; ++i) {
+    // creates a new node
+    var node = new Node(element);
+    // console.log("this element ", this.element.next);
 
-      // to store current node
-      var current;
+    // to store current node
+    var current;
 
-      // if list is Empty add the
-      // element and make it head
-      if (this.head == null) this.head = node;
-      else {
-        current = this.head;
-
-        // iterate to the end of the
-        // list
-        while (current.next) {
-          current = current.next;
-        }
-
-        // add node
-        current.next = node;
-      }
-      this.size++;
-    }
-  }
-  // insert element at the position index
-  // of the list
-  insertAt(element, index) {
-    if (index > 0 && index > this.size) return false;
+    // if list is Empty add the
+    // element and make it head
+    if (this.element === null) this.element = node.element;
     else {
-      // creates a new node
-      var node = new Node(element);
-      var curr, prev;
+      current = this;
 
-      curr = this.head;
-
-      // add the element to the
-      // first index
-      if (index == 0) {
-        node.next = this.head;
-        this.head = node;
-      } else {
-        curr = this.head;
-        var it = 0;
-
-        // iterate over the list to find
-        // the position to insert
-        while (it < index) {
-          it++;
-          prev = curr;
-          curr = curr.next;
-        }
-
-        // adding an element
-        node.next = curr;
-        prev.next = node;
+      // iterate to the end of the
+      // list
+      while (current.next) {
+        current = current.next;
       }
-      this.size++;
+
+      // add node
+      current.next = node;
     }
+    // }
   }
-  // removes an element from the
-  // specified location
-  removeFrom(index) {
-    if (index > 0 && index > this.size) return -1;
-    else {
-      var curr,
-        prev,
-        it = 0;
-      curr = this.head;
-      prev = curr;
-
-      // deleting first element
-      if (index === 0) {
-        this.head = curr.next;
-      } else {
-        // iterate over the list to the
-        // position to removce an element
-        while (it < index) {
-          it++;
-          prev = curr;
-          curr = curr.next;
-        }
-
-        // remove the element
-        prev.next = curr.next;
-      }
-      this.size--;
-
-      // return the remove element
-      return curr.element;
-    }
-  }
-  // removes a given element from the
-  // list
 
   // Helper Methods
-  // isEmpty
-  // size_Of_List
-  // PrintList
-
-  // finds the index of element
-
-  // checks the list for empty
-  isEmpty() {
-    return this.size == 0;
-  }
-
-  // gives the size of the list
-  size_of_list() {
-    return this.size;
-  }
 
   // prints the list items
   printList() {
-    var curr = this.head;
+    var curr = this;
     var str = "";
-    while (curr) {
+    while (curr && curr.element !== null) {
       str += curr.element[0] + "x^" + curr.element[1] + " + ";
       curr = curr.next;
     }
@@ -210,18 +104,69 @@ class LinkedList {
 }
 
 const polyAdd = (poly1, poly2, resultPoly) => {
-  // while(poly1[0].next )
+  while (poly1 && poly2) {
+    // If power of 1st polynomial is greater then 2nd, then store 1st as it is
+    // and move its pointer
+    if (poly1.element[1] > poly2.element[1]) {
+      resultPoly.element = poly1.element;
+      poly1 = poly1.next;
+    }
+
+    // If power of 2nd polynomial is greater then 1st, then store 2nd as it is
+    // and move its pointer
+    else if (poly1.element[1] < poly2.element[1]) {
+      resultPoly.element = poly2.element;
+      poly2 = poly2.next;
+    }
+
+    // If power of both polynomial numbers is same then add their coefficients
+    else {
+      resultPoly.element = poly1.element;
+      resultPoly.element[0] += poly2.element[0];
+      poly1 = poly1.next;
+      poly2 = poly2.next;
+    }
+    // Dynamically create new node
+    resultPoly.next = new Node();
+    resultPoly = resultPoly.next;
+    resultPoly.next = null;
+  }
+
+  while (poly1 || poly2) {
+    if (poly1) {
+      resultPoly.element = poly1.element;
+      poly1 = poly1.next;
+    }
+    if (poly2) {
+      resultPoly.element = poly2.element;
+      poly2 = poly2.next;
+    }
+
+    resultPoly.next = new Node();
+    resultPoly = resultPoly.next;
+    resultPoly.next = null;
+  }
 };
 
 export const zadanie = () => {
-  var poly1 = new LinkedList();
+  var poly1 = new Node();
   // Create first polunomial of 5x^2 + 4x^1 + 2x^0
-  poly1.add([5, 2], [4, 1], [2, 0]);
+  // poly1.add([5, 2], [4, 1], [2, 0]);
+  poly1.add([5, 2]);
+  poly1.add([4, 1]);
+  poly1.add([2, 0]);
 
-  var poly2 = new LinkedList();
+  var poly2 = new Node();
   // Create second polynomial of 5x^1 + 5x^0
-  poly2.add([5, 1], [5, 0]);
+  // poly2.add([5, 1], [5, 0]);
+  poly2.add([5, 1]);
+  poly2.add([5, 0]);
 
   poly1.printList();
   poly2.printList();
+  var result = new Node();
+  polyAdd(poly1, poly2, result);
+
+  // result should equal 5x^2 + 9x^1 + 7x^0
+  result.printList();
 };
