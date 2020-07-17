@@ -6,7 +6,7 @@ export const convertStringToArrayOfNumbers = (str) => {
 //[[1,-1], [2,2],[-1,1],[6,3]] // = x^(-1) + 2x^2 - x + 6x^3
 
 // Linked List implementation
-class Node {
+export class Node {
   constructor(element) {
     this.element = element ?? null;
     this.next = null;
@@ -60,10 +60,17 @@ class Node {
       curr = curr.next;
     }
     console.log(str.slice(0, -3));
+    return str.slice(0, -3);
   }
 }
 
-const polyAdd = (poly1, poly2, resultPoly) => {
+export const addPoly = (poly1, poly2) => {
+  const result = new Node();
+  add(poly1, poly2, result);
+  return result;
+};
+
+const add = (poly1, poly2, resultPoly) => {
   if (!poly1.element || !poly2.element) {
     console.log("ERROR: Values of both polynomials must be specified.");
     return;
@@ -116,7 +123,8 @@ const polyAdd = (poly1, poly2, resultPoly) => {
 export const addPolynomials = () => {
   const poly1 = new Node();
   // Create first polynomial of 5x^2 + 4x^1 + 2x^0 + (-4x^(-2) + (-4x^(-4))
-  poly1.add([5, 3], [4, 2], [2, 0], [-4, -2], [-4, -4]);
+  // poly1.add([5, 3], [4, 2], [2, 0], [-4, -2], [-4, -4]);
+  poly1.add(1);
 
   const poly2 = new Node();
   // Create second polynomial of 5x^1 + 5x^0
@@ -124,12 +132,13 @@ export const addPolynomials = () => {
 
   poly1.printList();
   poly2.printList();
-  const result = new Node();
-  polyAdd(poly1, poly2, result);
+
+  const result = addPoly(poly1, poly2);
   // Result in this case should equal 5x^2 + 9x^1 + 7x^0
   result.printList();
 };
 
 //TODO
 // PURE FUNCTIONS zrobic aby polyAdd zwracalo obiekt(czy cokolwiek to jest) z wynikiem
+// pozmieniac nazwy na bardziej logiczne i latwe do zrozumienia
 // testy jednostkowe
