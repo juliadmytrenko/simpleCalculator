@@ -1,21 +1,27 @@
-export const convertStringToArrayOfNumbers = (str) => {
-  return str.split`,`.map((x) => +x);
-};
+// export const convertStringToArrayOfNumbers = (str) => {
+//   return str.split`,`.map((x) => +x);
+// };
 
 //[[2,-1],[3,1],5] // = 2x^(-1) + 3x^1 + 5
 //[[1,-1], [2,2],[-1,1],[6,3]] // = x^(-1) + 2x^2 - x + 6x^3
 
 // Linked List implementation
+
+export interface Node {
+  element: [number, number] | null;
+  next: Node | null;
+}
+
 export class Node {
-  constructor(element) {
+  constructor(element?: Node["element"]) {
     this.element = element ?? null;
     this.next = null;
   }
 
   // adds an element at the end
   // of list
-  add() {
-    for (let i = 0; i < arguments.length; ++i) {
+  add(...args: Node["element"][]) {
+    for (let i = 0; i < args.length; ++i) {
       // creates a new node
       const node = new Node(arguments[i]);
 
@@ -44,13 +50,13 @@ export class Node {
 
   // prints the list items
   printList() {
-    let curr = this;
+    let curr: Node = this;
     let str = "";
     while (curr && curr.element) {
       if (curr.element[0] === 0) curr = curr.next;
 
-      let pow = curr.element[1];
-      if (pow < 0) pow = "(" + pow + ")";
+      let pow: string = curr.element[1].toString();
+      if (+pow < 0) pow = "(" + pow + ")";
 
       if (curr.element[0] < 0) {
         str += "(" + curr.element[0] + "x^" + pow + ") + ";
@@ -64,13 +70,13 @@ export class Node {
   }
 }
 
-export const addPoly = (poly1, poly2) => {
+export const addPoly = (poly1: Node, poly2: Node) => {
   const result = new Node();
   add(poly1, poly2, result);
   return result;
 };
 
-const add = (poly1, poly2, resultPoly) => {
+const add = (poly1: Node, poly2: Node, resultPoly: Node) => {
   if (!poly1.element || !poly2.element) {
     console.log("ERROR: Values of both polynomials must be specified.");
     return;
@@ -123,8 +129,8 @@ const add = (poly1, poly2, resultPoly) => {
 export const addPolynomials = () => {
   const poly1 = new Node();
   // Create first polynomial of 5x^2 + 4x^1 + 2x^0 + (-4x^(-2) + (-4x^(-4))
-  // poly1.add([5, 3], [4, 2], [2, 0], [-4, -2], [-4, -4]);
-  poly1.add(1);
+  poly1.add([5, 3], [4, 2], [2, 0], [-4, -2], [-4, -4]);
+  // poly1.add(1);
 
   const poly2 = new Node();
   // Create second polynomial of 5x^1 + 5x^0

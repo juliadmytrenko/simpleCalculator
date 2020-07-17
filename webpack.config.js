@@ -8,6 +8,11 @@ module.exports = {
         use: ["babel-loader"],
       },
       {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+      {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
@@ -25,7 +30,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ["*", ".js", ".jsx"],
+    extensions: ["*", ".js", ".jsx", ".tsx", ".ts"],
   },
   output: {
     path: __dirname + "/dist",

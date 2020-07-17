@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addPolynomials } from "../utils.js";
+import { addPolynomials } from "../utils.ts";
 
 const Calculator = () => {
   const [input1, setInput1] = useState("");
