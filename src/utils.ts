@@ -123,6 +123,7 @@ const add = (poly1: Node, poly2: Node, resultPoly: Node) => {
   }
 };
 
+// code to play with the addPoly function
 export const testAddPoly = () => {
   const poly1 = new Node();
   // Creates first polynomial of 5x^3 + 4x^2 + 2x^0

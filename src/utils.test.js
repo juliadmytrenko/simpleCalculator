@@ -45,7 +45,7 @@ describe("-->test addPoly", () => {
 });
 
 describe("-->test testAddPoly", () => {
-  it("Should output the correct result.", () => {
+  it("Should output 5x^3 + 4x^2 + 5x^1 + 7x^0", () => {
     expect(testAddPoly()).toEqual("5x^3 + 4x^2 + 5x^1 + 7x^0");
   });
 });
