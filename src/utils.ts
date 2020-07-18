@@ -1,10 +1,3 @@
-// export const convertStringToArrayOfNumbers = (str) => {
-//   return str.split`,`.map((x) => +x);
-// };
-
-//[[2,-1],[3,1],5] // = 2x^(-1) + 3x^1 + 5
-//[[1,-1], [2,2],[-1,1],[6,3]] // = x^(-1) + 2x^2 - x + 6x^3
-
 // Linked List implementation
 
 type PolyElement = [number, number];
@@ -78,7 +71,7 @@ export class Node {
 // e.g. `[5,4],[3,3],[7,2],[10,0],[2,-1]`  // OK
 //      `[5,3],[3,4],[7,2]`               // WRONG (should be `[3,4],[5,3],[7,2]`)
 // - expressions in single polynomial must not be duplicated
-// e.g. `[5,4],[5,4],[5,4]` // WRONG (will return incorrect result)
+// e.g. `[5,4],[5,4],[5,4]` // WRONG (the coefficients of duplicates will not sum up)
 export const addPoly = (poly1: Node, poly2: Node) => {
   const result = new Node();
   add(poly1, poly2, result);
@@ -130,19 +123,19 @@ const add = (poly1: Node, poly2: Node, resultPoly: Node) => {
   }
 };
 
-export const addPolynomials = () => {
+export const testAddPoly = () => {
   const poly1 = new Node();
-  // Create first polynomial of 5x^2 + 4x^1 + 2x^0 + (-4x^(-2) + (-4x^(-4))
-  poly1.add([5, 3], [4, 2], [2, 0], [-4, -2], [-4, -4]);
+  // Creates first polynomial of 5x^3 + 4x^2 + 2x^0
+  poly1.add([5, 3], [4, 2], [2, 0]);
 
   const poly2 = new Node();
-  // Create second polynomial of 5x^1 + 5x^0
-  poly2.add([5, 1], [5, 0], [4, -2]);
+  // Creates second polynomial of 5x^1 + 5x^0
+  poly2.add([5, 1], [5, 0]);
 
   poly1.printList();
   poly2.printList();
 
   const result = addPoly(poly1, poly2);
-  // Result in this case should equal 5x^2 + 9x^1 + 7x^0
-  result.printList();
+  // Result in this case should equal to 5x^3 + 4x^2 + 5x^1 + 7x^0
+  return result.printList();
 };

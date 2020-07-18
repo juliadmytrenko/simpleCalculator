@@ -1,9 +1,9 @@
 import React from "react";
-import { addPolynomials } from "../utils.ts";
+import { testAddPoly } from "../utils.ts";
 
 const Calculator = () => {
   const handleOnClick = () => {
-    addPolynomials();
+    testAddPoly();
   };
 
   return <button onClick={handleOnClick}>Submit</button>;
