@@ -1,8 +1,8 @@
 # simpleCalculator
 
-An app written in TypeScript
+An app written in TypeScript.
 
-contains a function to add two simple mathematical expressions which are of the form
+It contains a function to add two simple mathematical expressions which are of the form
 Ax<sup>a</sup>+ Bx<sup>b</sup>+ … (where the coefficients and exponents can be any positive or negative real
 number). 
 
@@ -25,6 +25,8 @@ $ yarn install
 $ yarn start
 $ yarn test
 ```
+
+the solution is in the src/utils.ts file :) 
 
 
 
