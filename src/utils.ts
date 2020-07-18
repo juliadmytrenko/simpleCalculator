@@ -72,6 +72,13 @@ export class Node {
   }
 }
 
+// Adds two polynomials and returns the result.
+// For this function to add polynomials properly:
+// - expressions of each polynomial must be ordered from the greatest power to the lowest power
+// e.g. `[5,4],[3,3],[7,2],[10,0],[2,-1]`  // OK
+//      `[5,3],[3,4],[7,2]`               // WRONG (should be `[3,4],[5,3],[7,2]`)
+// - expressions in single polynomial must not be duplicated
+// e.g. `[5,4],[5,4],[5,4]` // WRONG (will return incorrect result)
 export const addPoly = (poly1: Node, poly2: Node) => {
   const result = new Node();
   add(poly1, poly2, result);
@@ -79,11 +86,6 @@ export const addPoly = (poly1: Node, poly2: Node) => {
 };
 
 const add = (poly1: Node, poly2: Node, resultPoly: Node) => {
-  // if (!poly1.element || !poly2.element) {
-  //   console.log("ERROR: Values of both polynomials must be specified.");
-  //   return;
-  // }
-
   while (poly1 && poly2) {
     // If power of 1st polynomial is greater then 2nd, then store 1st as it is
     // and move its pointer
@@ -131,8 +133,7 @@ const add = (poly1: Node, poly2: Node, resultPoly: Node) => {
 export const addPolynomials = () => {
   const poly1 = new Node();
   // Create first polynomial of 5x^2 + 4x^1 + 2x^0 + (-4x^(-2) + (-4x^(-4))
-  // poly1.add([5, 3], [4, 2], [2, 0], [-4, -2], [-4, -4]);
-  poly1.add([1, 2], [1, 3]);
+  poly1.add([5, 3], [4, 2], [2, 0], [-4, -2], [-4, -4]);
 
   const poly2 = new Node();
   // Create second polynomial of 5x^1 + 5x^0
@@ -145,8 +146,3 @@ export const addPolynomials = () => {
   // Result in this case should equal 5x^2 + 9x^1 + 7x^0
   result.printList();
 };
-
-//TODO
-// PURE FUNCTIONS zrobic aby polyAdd zwracalo obiekt(czy cokolwiek to jest) z wynikiem
-// pozmieniac nazwy na bardziej logiczne i latwe do zrozumienia
-// testy jednostkowe
