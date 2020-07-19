@@ -60,7 +60,6 @@ export class Node {
       }
       curr = curr.next;
     }
-    console.log(str.slice(0, -3));
     return str.slice(0, -3);
   }
 }
@@ -132,9 +131,6 @@ export const testAddPoly = () => {
   const poly2 = new Node();
   // Creates second polynomial of 5x^1 + 5x^0
   poly2.add([5, 1], [5, 0]);
-
-  poly1.printList();
-  poly2.printList();
 
   const result = addPoly(poly1, poly2);
   // Result in this case should equal to 5x^3 + 4x^2 + 5x^1 + 7x^0
